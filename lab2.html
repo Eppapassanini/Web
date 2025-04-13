@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="Lab2.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center; margin-top: 30px;">Забронируйте свое путешествие!</h1>
+
+    <form action="#">
+    <div class="box">
+        <label for="Name">Ваше имя</label>
+    
+        <input type="text" required placeholder="Введите имя" id="Name">
+        
+
+        <label for="Email">Введите Email</label>
+
+        <input type="email" name="User Email" id="Email" required placeholder="example@dvfu.ru">
+
+        <label for="adv type">Тип путешествия</label>
+
+        <select style="width: 30%; font-size: 18px; text-align: center;margin: 10px;" id="adv type">
+            <option value="1">Пляжный отдых</option>
+            <option value="2">Экскурсионный тур</option>
+            <option value="3">Приключения</option>
+            <option value="4">Круиз</option>
+        </select>
+
+        <label for="amount">Количество путешественников</label>
+
+        <input type="number" min="1" max="10" step="1" required style="margin: 10px; width: 10%; text-align: center;" placeholder="Минимум 1" id="number">
+
+        <label for="date">Дата начала путешествия</label>
+
+        <input type="date" style="width: auto; font-size: 16px; text-align: center; margin: 10px;" required id="date">
+
+        <label for="wishes">Ваши пожелания</label>
+
+        <textarea placeholder="Не более 200 символов" style="font-size: 18px; margin: 10px;" rows="4" cols="50" maxlength="200" id="wishes"></textarea>
+
+        <div>
+        <input type="checkbox" required id="privacy">
+        <label for="privacy">Я согласен на обработку персональных данных</label>
+        </div>
+        <input type="submit" value="Забронировать" style="font-size: 16px; margin: 10px;">
+    </div>
+</form>
+</body>
+</html>
