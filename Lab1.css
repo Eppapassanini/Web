@@ -1,0 +1,73 @@
+h1{
+    color: rgb(255, 255, 255);
+    font-family:'Courier New', Courier, monospace;
+}
+h2{
+    color: rgb(255, 255, 255);
+    font-family:'Courier New', Courier, monospace;
+}
+text{
+    font-size: 24px;
+    color: #ffffff;
+
+}
+body{ background-color: rgb(142, 48, 197);}
+input[type = "text"]{
+    font-size: 20px;
+    width: 200px;
+}
+input[type = "password"]{
+    font-size: 20px;
+    width: 200px;
+}
+input[type='radio']{
+    transform: scale(1.7);
+    display: inline;
+    margin: 10px;
+}
+.flexbox{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+}
+.first{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    vertical-align: middle;
+}
+.second{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.left{
+    width: 50%;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 5px;
+}
+.right div{
+    display: flex;
+    flex-direction: row;
+}
+.third{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+}
+label{
+    color: rgb(255, 255, 255);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 22px;
+}
+select{
+    font-size: 20px;
+    width: 210px;
+}
+        
