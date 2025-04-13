@@ -14,11 +14,11 @@ text{
 body{ background-color: rgb(142, 48, 197);}
 input[type = "text"]{
     font-size: 20px;
-    width: 200px;
+    width: 40%;
 }
 input[type = "password"]{
     font-size: 20px;
-    width: 200px;
+    width: 40%;
 }
 input[type='radio']{
     transform: scale(1.7);
@@ -70,4 +70,3 @@ select{
     font-size: 20px;
     width: 210px;
 }
-        
