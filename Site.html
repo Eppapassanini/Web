@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monti-холл</title>
+</head>
+<body>
+    <div class="text1" id="text">Монти-Холл</div>
+    <div class="Mitty">
+        <div class="Mit">
+        <img src="Characters_icon.ico" width="100%" height="100%">
+        </div>
+        <div class="animated-text" id="text1">
+            Привет! Добро пожаловать в мою программу "Митти-Холл". Я - Митти. Предлагаю вам сыграть в игру. Правила простые: три двери, за одной лежит приз, за остальными - проигрыш. Выберите дверь, а я выберу одну дверь, за которой лежит проигрыш. Дальше выбирайте сами: оставить выбор или поменять.
+        </div>
+        <button id="butt_1" onclick="step1">Продолжить</button>
+    </div>
+    <div class="game">
+        <div class="door1" onclick="door1_ev">
+            <img src="door.png" width="100%" height="100%" id="door1">
+        </div>
+        <div class="door2" onclick="door2_ev">
+            <img src="door.png" width="100%" height="100%" id="door2">
+        </div>
+        <div class="door3" onclick="door3_ev">
+            <img src="door.png" width="100%" height="100%" id="door3">
+        </div>
+    </div>
+</body>
+<script src="Script.js"></script>
+</html>
