@@ -1,113 +1,69 @@
 body{
-    background-color: rgb(251, 212, 255);
+    background-color: rgb(198, 228, 255);
 }
-img{
-    transition: 30ms;
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 4px solid black;
+    box-shadow: 3px 3px 16px rgb(49, 49, 49);
+    width: 612px;
+    height: 612px;
+    justify-self: center;
+    margin-top: 5%;
 }
-.swipe2{
-    animation: swipe 3s forwards;
-}
-.text1{
-    text-align: center;
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 72px;
-    font-family: 'Courier New', Courier, monospace;
-    letter-spacing: 12px;
-    font-weight: bold;
-    animation-name: swipe1;
-    animation-duration: 0s;
-    animation-delay: 3s;
-    animation-fill-mode: forwards;
+    cursor: pointer;
+    border: 2px solid black;
+    height: 200px;
+    width: 200px;
+    text-shadow: 1px 1px 3px rgb(87, 87, 87);
 }
-.animated-text{
-    clip-path: inset(0 100% 0 0);
+.winner {
+    background-color: lightgreen;
+}
+.reset_button{
+    margin-top: 3%;
+    justify-self: center;
+}
+button{
+    background-color: yellow;
     font-size: 24px;
-    font-family: 'Franklin Gothic Medium';
-    animation: typing1 1s forwards;
-    margin-left: 5%;
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    box-shadow: 0px 10px 10px black;
 }
-.Mitty{
+button:active{
+    box-shadow: 0px 0px 0px;
+    margin-top: 4%;
+}
+.final_text{
+    background-color: rgb(143, 212, 224);
+    border: 3px solid black;
     display: flex;
+    width: 85%;
+    height: 20%;
+    margin-top: 10%;
+    font-size: 64px;
     align-items: center;
-    flex-direction: column;
-    margin: 1%;
-    margin-left: 5%;
-    height: 400px;
-    width: 90%;
-    background-color: rgb(255, 192, 245);
+    position: absolute;
+    z-index: 1;
+    margin-left: 100%;
+    justify-content: center;
+    content: normal;
 }
-.fade{
-    animation: fade 1s forwards;
+.result{
+    animation: result 1.5s cubic-bezier(1, 0.01, 0.1, 1) forwards;
 }
-.Mit{
-    height: 60%;
-    width: 15%;
-    align-self: center;
-}
-#butt_1{
-    background-color: rgb(224, 224, 224);
-}
-.game{
-    display: flex;
-    flex-direction: row;
-    width: 70%;
-    margin-left: 200%;
-    height: 400px;
-    border: 3px double rgb(90, 90, 90);
-    background-color: rgb(255, 184, 91);
-    align-items: center;
-}
-.door1{
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    background-color: rgb(255, 246, 117);
-    width: 30%;
-    height: 80%;
-}
-.door2{
-    width: 30%;
-    height: 80%;
-    background-color: rgb(255, 246, 117);
-}
-.door3{
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    height: 80%;
-    width: 30%;
-    background-color: rgb(255, 246, 117);
-}
-.door1:hover, .door2:hover, .door3:hover{
-    background-color: white;
-    scale: 1.1;
-}
-@keyframes typing1 {
+@keyframes result {
     from {
-    clip-path: inset(0 100% 0 0);
-  }
-    to{
-        clip-path: inset(0 0 0 0);
-    }
-}
-@keyframes typing2 {
-    from{
-        clip-path: inset(0 100% 0 0);
+        margin-left: 100%;
     }
     to{
-        clip-path: inset(0 0 0 0);
-    }
-}
-@keyframes fade {
-    from{
-        clip-path: inset(0 0 0 0);
-    }
-    to{
-        clip-path: inset(0 0 100% 0);
-    }
-}
-@keyframes swipe {
-    from{
-        margin-left: 200%;
-    }
-    to{
-        margin-left: 15%;
+        margin-left: 7.5%;
     }
 }

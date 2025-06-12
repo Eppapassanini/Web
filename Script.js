@@ -1,183 +1,172 @@
-document.getElementById('butt_1').onclick = step1;
-function sleep(ms){
-    return new Promise(resolve => setTimeout(resolve, ms));
+function sleep(ms){return new Promise(resolve => setTimeout(resolve, ms));}
+const board = document.querySelector('.board');
+const cells = document.querySelectorAll('.cell');
+let boardState = Array(9).fill(null);
+let currentPlayer = 'X';
+let gameActive = true;
+let block = document.getElementById("text");
+
+async function handleCellClick(event) {
+    const index = event.target.dataset.index;
+    if (!boardState[index] && gameActive) {
+        boardState[index] = currentPlayer;
+        event.target.textContent = currentPlayer;
+        await sleep(10);
+        play();
 }
-count = 0;
-document.getElementById('door1').onclick = door1_ev;
-document.getElementById('door2').onclick = door2_ev;
-document.getElementById('door3').onclick = door3_ev;
-door1 = document.getElementById('door1');
-door2 = document.getElementById('door2');
-door3 = document.getElementById('door3');
-button = document.getElementById('butt_1');
-text = document.getElementById('text1');
-async function door1_ev() {
-    if (count === 0){
-        door1.style.pointerEvents = 'none';
-        door2.style.pointerEvents = 'none';
-        door3.style.pointerEvents = 'none';
-        door3.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(0deg)";
-        await sleep(500);
-        door3.src = "soda.ico";
-        text.classList.add('fade');
-        await sleep(1000);
-        text.textContent = "За третьей дверью лежит проигрыш! Выберите оставшуюся из двух";
-        text.classList.remove('fade');
-        count = 1;
-        door1.style.pointerEvents = 'all';
-        door2.style.pointerEvents = 'all';
-    }
-    else {
-        door1.style.pointerEvents = 'none';
-        door2.style.pointerEvents = 'none';
-        door1.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door1.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door1.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door1.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door1.style.transform = "rotate(0deg)";
-        await sleep(500);
-        door1.src = "soda.ico";
-        text.classList.add('fade');
-        await sleep(1000);
-        text.textContent = "Упс! Вы проиграли!";
-        text.classList.remove('fade');
-        await sleep(1000);
-        door2.src = "car.png"
-        await sleep(2200);
-        text.classList.add('fade');
-        await sleep(1000);
-        text.textContent = "Ничего страшного. В следующий раз вы точно выиграете :3";
-        text.classList.remove('fade');
+
+async function play(){
+    if (checkWin()) {
+            gameActive = false;
+            board.classList.add('winner');
+            cells.forEach(cell => cell.classList.add('winner'));
+            block.textContent = `Победил ${currentPlayer === 'X' ? 'Игрок :(' : 'Компьютер >:D'}`;
+            await sleep(10);
+            block.classList.add("result")
+        } else if (isDraw()) {
+            gameActive = false;
+            block.textContent = "Ничья :/";
+            await sleep(10);
+            block.classList.add("result");
+        } else {
+            switchPlayer();
+            SwitchToComputer();
+        }
     }
 }
-async function door2_ev() {
-    if (count === 0){
-        door1.style.pointerEvents = 'none';
-        door2.style.pointerEvents = 'none';
-        door3.style.pointerEvents = 'none';
-        door3.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(0deg)";
-        await sleep(500);
-        door3.src = "soda.ico";
-        text.classList.add('fade');
-        await sleep(1000);
-        text.textContent = "За третьей дверью лежит проигрыш! Выберите оставшуюся из двух";
-        text.classList.remove('fade');
-        count = 1;
-        door1.style.pointerEvents = 'all';
-        door2.style.pointerEvents = 'all';
+
+async function computerPlay(){
+    if (checkWin()) {
+            gameActive = false;
+            board.classList.add('winner');
+            cells.forEach(cell => cell.classList.add('winner'));
+            block.textContent = `Победил ${currentPlayer === 'X' ? 'Игрок :(' : 'Компьютер >:D'}`;
+            await sleep(10);
+            block.classList.add("result")
+        } else if (isDraw()) {
+            gameActive = false;
+            block.textContent = "Ничья :/";
+            await sleep(10);
+            block.classList.add("result");
+        } else {
+            switchPlayer();
+        }
     }
-    else {
-        door1.style.pointerEvents = 'none';
-        door2.style.pointerEvents = 'none';
-        door2.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door2.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door2.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door2.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door2.style.transform = "rotate(0deg)";
-        await sleep(500);
-        door2.src = "car.png";
-        text.classList.add('fade');
-        await sleep(1000);
-        text.textContent = "Надо же, вы выиграли!";
-        text.classList.remove('fade');
-        await sleep(1000);
-        door1.src = "soda.ico"
-        await sleep(2200);
-        text.classList.add('fade');
-        await sleep(1000);
-        text.textContent = "Поздравляю! Этот приз отныне принадлежит вам.";
-        text.classList.remove('fade');
+
+async function SwitchToComputer(){
+    if (gameActive){
+        if (FindWin()) {Win()}
+        else if (FindLose()) {SaveLose()}
+        else {
+            let iindex = Math.floor(Math.random()*9);
+            while (boardState[iindex]){iindex = Math.floor(Math.random()*9);}
+            boardState[iindex] = currentPlayer;
+            cells[iindex].textContent = currentPlayer;
+            computerPlay();
+        }
     }
 }
-async function door3_ev() {
-    if (count === 0){
-        door1.style.pointerEvents = 'none';
-        door2.style.pointerEvents = 'none';
-        door3.style.pointerEvents = 'none';
-        door1.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door1.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door1.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door1.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door1.style.transform = "rotate(0deg)";
-        await sleep(500);
-        door1.src = "soda.ico";
-        text.classList.add('fade');
-        await sleep(1000);
-        text.textContent = "За первой дверью лежит проигрыш! Выберите оставшуюся из двух";
-        text.classList.remove('fade');
-        count = 1;
-        door2.style.pointerEvents = 'all';
-        door3.style.pointerEvents = 'all';
-    }
-    else {
-        door2.style.pointerEvents = 'none';
-        door3.style.pointerEvents = 'none';
-        door3.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(-6deg)";
-        await sleep(30);
-        door3.style.transform = "rotate(0deg)";
-        await sleep(500);
-        door3.src = "soda.ico";
-        text.classList.add('fade');
-        await sleep(1000);
-        text.textContent = "Упс! Вы проиграли!";
-        text.classList.remove('fade');
-        await sleep(1000);
-        door2.src = "car.png"
-        await sleep(2200);
-        text.classList.add('fade');
-        await sleep(1000);
-        text.textContent = "Ничего страшного. В следующий раз вы точно выиграете :3";
-        text.classList.remove('fade');
+
+function switchPlayer() {
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+}
+
+async function Win() {
+    for (let i = 0; i < 9; i++){
+        if (!boardState[i]){
+            boardState[i] = currentPlayer;
+            if (checkWin()){
+                cells[i].textContent = currentPlayer;
+                computerPlay();
+                break;
+            }
+            else {
+                boardState[i] = null;
+            }
+        }
     }
 }
-async function step1(){
-    button.style.display = 'none';
-    text.classList.add('fade');
-    await sleep(1000);
-    text.classList.remove('fade');
-    text.textContent = "Пожалуйста, выберите дверь.";
-    document.getElementsByClassName('game')[0].classList.add('swipe2')
+
+function FindWin(){
+    for (let i = 0; i < 9; i++){
+        if (!boardState[i]){
+            boardState[i] = currentPlayer;
+            if (checkWin()){
+                boardState[i] = null;
+                return true;
+            }
+            else {
+                boardState[i] = null;
+            }
+        }
+    }
+    return false;
 }
-header = document.getElementById('text');
-setTimeout(() =>{header.textContent = "Монт-Холл"},2000);
-setTimeout(() =>{header.textContent = "Мон-Холл"},2100);
-setTimeout(() =>{header.textContent = "Мо-Холл"},2200);
-setTimeout(() =>{header.textContent = "М-Холл"},2300);
-setTimeout(() =>{header.textContent = "Ми-Холл"},3000);
-setTimeout(() =>{header.textContent = "Мит-Холл"},3100);
-setTimeout(() =>{header.textContent = "Митт-Холл"},3200);
-setTimeout(() =>{header.textContent = "Митти-Холл"},3300);
+
+function FindLose(){
+    for (let i = 0; i < 9; i++){
+        if (!boardState[i]){
+            boardState[i] = 'X';
+            if (checkWin()){
+                boardState[i] = null;
+                return true;
+            }
+            else {
+                boardState[i] = null;
+            }
+        }
+    }
+    return false;
+}
+async function SaveLose(){
+    for (let i = 0; i < 9; i++){
+        if (!boardState[i]){
+            boardState[i] = 'X';
+            if (checkWin()){
+                boardState[i] = currentPlayer
+                cells[i].textContent = currentPlayer;
+                computerPlay();
+                break;
+            }
+            else {
+                boardState[i] = null;
+            }
+        }
+    }
+    return false;
+}
+
+function checkWin() {
+    const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+        [0, 4, 8], [2, 4, 6]             
+    ];
+
+    for (const pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function isDraw() {
+    return !boardState.includes(null);
+}
+
+function resetGame() {
+    boardState = Array(9).fill(null);
+    currentPlayer = 'X';
+    gameActive = true;
+    cells.forEach(cell => {
+        cell.textContent = '';
+        cell.classList.remove('winner');
+        board.classList.remove('winner');
+    });
+    block.classList.remove("result");
+    block.textContent = "Try Again!";
+}
+
+cells.forEach(cell => cell.addEventListener('click', handleCellClick));
